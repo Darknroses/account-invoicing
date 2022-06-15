@@ -26,7 +26,8 @@ class AccountMove(models.Model):
         lines_without_product = []
         fp = self.fiscal_position_id
         inv_type = self.type
-        for line in self.invoice_line_ids:
+        invoice_lines = self.invoice_line_ids.filtered(lambda l: not l.display_type)
+        for line in invoice_lines:
             if line.product_id:
                 account = line._get_computed_account()
                 product = line.with_context(force_company=self.company_id.id).product_id
@@ -47,14 +48,16 @@ class AccountMove(models.Model):
                     taxes = fp.map_tax(taxes)
 
                 line.tax_ids = [(6, 0, taxes.ids)]
+                line._onchange_mark_recompute_taxes()
 
                 line.account_id = account.id
             else:
                 lines_without_product.append(line.name)
+        self.with_context(check_move_validity=False)._recompute_dynamic_lines()
 
         if lines_without_product:
             res["warning"] = {"title": _("Warning")}
-            if len(lines_without_product) == len(self.invoice_line_ids):
+            if len(lines_without_product) == len(invoice_lines):
                 res["warning"]["message"] = _(
                     "The invoice lines were not updated to the new "
                     "Fiscal Position because they don't have products. "

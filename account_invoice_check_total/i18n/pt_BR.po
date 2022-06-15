@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-02-15 03:39+0000\n"
 "PO-Revision-Date: 2019-09-23 14:24+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,30 +48,40 @@ msgstr ""
 "igual ao total de verificação."
 
 #. module: account_invoice_check_total
-#: model:ir.model,name:account_invoice_check_total.model_account_invoice
-msgid "Invoice"
-msgstr "Fatura"
+#: model:ir.model,name:account_invoice_check_total.model_account_move
+msgid "Journal Entries"
+msgstr ""
 
 #. module: account_invoice_check_total
-#: code:addons/account_invoice_check_total/models/account_invoice.py:48
+#: code:addons/account_invoice_check_total/models/account_move.py:0
 #, python-format
 msgid ""
 "Please verify the price of the invoice!\n"
-"                        The total amount (%s) does not "
-"match                        the Verification Total amount (%s)!\n"
-"There is a difference of %s"
+"The total amount ({total}) does not match the Verification Total amount "
+"({check_total})!\n"
+"There is a difference of {difference}"
 msgstr ""
-"Verifique o preço da fatura!\n"
-"                         O valor total (%s) não corresponde ao valor total "
-"da verificação (%s)!\n"
-"Há uma diferença de %s"
 
 #. module: account_invoice_check_total
-#: model:ir.model.fields,field_description:account_invoice_check_total.field_account_invoice__check_total_display_difference
+#: model:ir.model.fields,field_description:account_invoice_check_total.field_account_move__check_total_display_difference
 msgid "Total Difference"
 msgstr "Diferença Total"
 
 #. module: account_invoice_check_total
-#: model:ir.model.fields,field_description:account_invoice_check_total.field_account_invoice__check_total
+#: model:ir.model.fields,field_description:account_invoice_check_total.field_account_move__check_total
 msgid "Verification Total"
 msgstr "Verificação Total"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please verify the price of the invoice!\n"
+#~ "The total amount (%s) does not match the Verification Total amount (%s)!\n"
+#~ "There is a difference of %s"
+#~ msgstr ""
+#~ "Verifique o preço da fatura!\n"
+#~ "                         O valor total (%s) não corresponde ao valor "
+#~ "total da verificação (%s)!\n"
+#~ "Há uma diferença de %s"
+
+#~ msgid "Invoice"
+#~ msgstr "Fatura"

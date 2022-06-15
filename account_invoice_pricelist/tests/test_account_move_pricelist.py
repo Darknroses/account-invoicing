@@ -193,6 +193,7 @@ class TestAccountMovePricelist(common.SavepointCase):
         cls.invoice = cls.AccountMove.create(
             {
                 "partner_id": cls.partner.id,
+                "fiscal_position_id": cls.fiscal_position.id,
                 "type": "out_invoice",
                 "invoice_line_ids": [
                     (
@@ -215,7 +216,26 @@ class TestAccountMovePricelist(common.SavepointCase):
                             "price_unit": 100.00,
                         },
                     ),
+                    (
+                        0,
+                        0,
+                        {"display_type": "line_section", "name": "Test line section"},
+                    ),
                 ],
+            }
+        )
+        # Fix currency rate of EUR -> USD to 1.5289
+        usd_currency = cls.env["res.currency"].search([("name", "=", "USD")])
+        usd_rates = cls.env["res.currency.rate"].search(
+            [("currency_id", "=", usd_currency.id)]
+        )
+        usd_rates.unlink()
+        cls.env["res.currency.rate"].create(
+            {
+                "currency_id": usd_currency.id,
+                "rate": 1.5289,
+                "create_date": "2010-01-01",
+                "write_date": "2010-01-01",
             }
         )
 
